@@ -53,16 +53,16 @@ while True:
 
                             name = f'{event.object.from_id}-{random.randint(1, 999999999)}'
 
-                            img.save(f'files/output/{name}.png')
+                            img.save(f'files/{name}.png')
 
                             server = vk.method("photos.getMessagesUploadServer")
-                            upload = requests.post(server['upload_url'], files={'photo': open(f'files/output/{name}.png', 'rb')}).json()
+                            upload = requests.post(server['upload_url'], files={'photo': open(f'files/{name}.png', 'rb')}).json()
                             save = vk.method('photos.saveMessagesPhoto', {'photo': upload['photo'], 'server': upload['server'], 'hash': upload['hash']})[0]
                             photo = "photo{}_{}".format(save["owner_id"], save["id"])
 
                             vk.method("messages.send", {"peer_id": event.object.peer_id, "attachment": photo, "random_id": 0})
 
-                            os.remove(f'files/output/{name}.png')
+                            os.remove(f'files/{name}.png')
 
     except Exception as e:
         print(repr(e))
