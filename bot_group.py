@@ -29,7 +29,7 @@ def upload_photo(name):
 
 
 def creator(photo_link, text_1, text_2, name):
-    img = Image.new('RGB', (1280, 1024), color='#000000')
+    img = Image.new('RGB', (1280, 1124), color='#000000')
     img_border = Image.new('RGB', (1060, 720), color='#000000')
     border = ImageOps.expand(img_border, border=2, fill='#ffffff')
 
@@ -39,15 +39,28 @@ def creator(photo_link, text_1, text_2, name):
     img.paste(border, (111, 96))
     img.paste(user_img, (118, 103))
 
+    fontsize = 1
+
     drawer = ImageDraw.Draw(img)
-    font_1 = ImageFont.truetype(font='files/font/times-new-roman.ttf', size=50, encoding='UTF-8')
+    font_1 = ImageFont.truetype("files/font/times-new-roman.ttf", fontsize, encoding='UTF-8')
     font_2 = ImageFont.truetype(font='files/font/times-new-roman.ttf', size=30, encoding='UTF-8')
 
+    if len(text_1) <= 25:
+        img_fraction = 0.40
+    if len(text_1) > 25:
+        img_fraction = 0.85
+
+    while font_1.getsize(text_1)[0] < img_fraction * img.size[0]:
+        fontsize += 1
+        font_1 = ImageFont.truetype("files/font/times-new-roman.ttf", fontsize, encoding='UTF-8')
+    fontsize -= 1
+    font_1 = ImageFont.truetype("files/font/times-new-roman.ttf", fontsize, encoding='UTF-8')
+
     size_1 = drawer.textsize(f'{text_1}', font=font_1)
-    drawer.text(((1280 - size_1[0]) / 2, 850), f'{text_1}', fill=(240, 230, 210), font=font_1)
+    drawer.text(((1280 - size_1[0]) / 2, 880), f'{text_1}', fill=(240, 230, 210), font=font_1)
 
     size_2 = drawer.textsize(f'{text_2}', font=font_2)
-    drawer.text(((1280 - size_2[0]) / 2, 950), f'{text_2}', fill=(240, 230, 210), font=font_2)
+    drawer.text(((1280 - size_2[0]) / 2, 1010), f'{text_2}', fill=(240, 230, 210), font=font_2)
 
     img.save(f'files/{name}.png')
 
@@ -124,14 +137,14 @@ def sender():
                                 msg_1 = []
                                 msg_2 = []
 
-                                for text in range(random.randint(3, 6)):
+                                for text in range(random.randint(3, 7)):
                                     word = random.choice(words)
                                     if word not in msg_1:
                                         msg_1.append(word)
                                     else:
                                         continue
 
-                                for text in range(random.randint(2, 5)):
+                                for text in range(random.randint(3, 6)):
                                     word = random.choice(words)
                                     if word not in msg_2:
                                         msg_2.append(word)
