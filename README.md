@@ -4,7 +4,7 @@
 
 - **<префикс> <перенос на новую строку> фраза 1 <перенос на новую строку>  фраза 2** - делает мем из прикрепленной картинки и текста
 ## Префиксы:
-- **Gen, gen, Demotivator, demotivator, Ген, ген, Демотиватор, демотиватор**
+- **!gen, !d, !ген, !д**
 ## Пример:
 ![alt tag](https://sun9-46.userapi.com/impg/rOKfUPNId0kTG4HgBEd2k6bo-A2u6fbKTbSiAg/zzOvqyU0Fy0.jpg?size=527x738&quality=96&proxy=1&sign=ce73bb953119b3c33e70a5a8142ebb46 "Пример тут")
 
