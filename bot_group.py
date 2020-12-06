@@ -58,8 +58,11 @@ def getter():
             for event in longpoll.listen():
                 if event.type == VkBotEventType.MESSAGE_NEW:
 
-                    text = event.obj["text"].split(' ')
-                    if not text[0] in c.DEMOTIVATOR:
+                    text = event.obj["text"].replace(' \n', ' ')
+                    text = text.replace('\n', ' ')
+                    text = text.split(' ')
+
+                    if text[0] not in c.DEMOTIVATOR:
 
                         if len(event.obj["text"]) >= 1:
                             print(f"[Getter]: Обнаружен текст")
